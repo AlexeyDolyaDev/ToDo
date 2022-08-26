@@ -14,9 +14,17 @@ function App() {
             text: text,
             isDone: false
         }
-        // console.log('DATA', task)
         setTask(tasks => [...tasks, task]);
         setText('');
+    }
+
+    const changeIsDone = (id) => {
+        tasks.map((task) => {
+            if (task.id === id ) {
+                task.isDone = !task.isDone
+            }
+            console.log(tasks)
+        })
     }
 
   return (
@@ -24,10 +32,10 @@ function App() {
       <h1>To-Do list</h1>
       <div className="createForm">
         <Input onChange={(event) => setText(event.target.value)} value={text}/>
-        <Button onClick={createTask}/>
+        <Button onClick={createTask} text="Press"/>
       </div>
         {
-            tasks.map((task) => <Task key={task.id} data={task} />)
+            tasks.map((task) => <Task key={task.id} data={task} makeCheck={(id) => changeIsDone(id)}/>)
         }
     </div>
   );
